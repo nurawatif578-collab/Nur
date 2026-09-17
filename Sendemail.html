@@ -1,0 +1,49 @@
+            <label for="order">Your order:</label>
+            <textarea id="order" name="order" placeholder="Waiting for text ..." ></textarea>
+            <button type="submit">Send order to Email</button>
+        </form>
+    </div>
+    
+    <script>
+        function saveToMessage() {
+            const form = document.getElementById('myForm');
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+            let message = "Selected Items & Values:\n";
+
+            checkboxes.forEach((chk) => {
+                if (chk.checked) {
+                    const parentDiv = chk.closest('.sub-col');
+                    const textInputs = parentDiv.querySelectorAll('input[type="text"], input[type="number"]');                    
+                    let textValues = Array.from(textInputs).map(input => input.value || input.defaultValue).join(', ');
+                    message += `- ${chk.value}: ${textValues}\n`;
+                }
+                
+            });
+       
+            document.getElementById('outputMessage').value = message;
+
+            var text1 = document.getElementById("outputMessage").value;
+            var text2 = document.getElementById("address").value;
+            // 2. Concatenate them with a space in between
+           // Option A: Template Literals (Recommended)
+           var combined = text1 + "Delivery address : " + text2; 
+           //alert(combined);
+            document.getElementById('orderAndaddress').value =combined;
+            const source1 = document.getElementById("orderAndaddress");
+            const sourceValue = source1.value;
+            alert(sourceValue);
+            document.getElementById('order').value = sourceValue;
+           // const destination1 = document.getElementById('order');
+
+            // Updates the second textarea in real-time as you type in the first
+           // source.addEventListener('input', () => {
+           //    destination1.value = sourceValue;
+           //   });
+        
+         }   
+    </script>
+
+
+    
+</body>
+</html>
